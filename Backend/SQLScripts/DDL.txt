@@ -1,0 +1,68 @@
+CREATE DATABASE IF NOT EXISTS CarRentalSystem;
+USE CarRentalSystem;
+
+DROP TABLE IF EXISTS Reservations;
+DROP TABLE IF EXISTS Payments;
+DROP TABLE IF EXISTS Cars;
+DROP TABLE IF EXISTS Offices;
+DROP TABLE IF EXISTS Customers;
+DROP TABLE IF EXISTS Admins;
+
+CREATE TABLE Admins (
+    AdminId INT PRIMARY KEY AUTO_INCREMENT,
+    FirstName VARCHAR(50) NOT NULL,
+    LastName VARCHAR(50) NOT NULL,
+    PhoneNumber VARCHAR(11),
+    Email VARCHAR(100) NOT NULL UNIQUE,
+	UserPassword VARCHAR(50) NOT NULL,
+    Sex ENUM('male','female'),
+    Bdate date 
+);
+
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY AUTO_INCREMENT,
+    FirstName VARCHAR(50) NOT NULL,
+    LastName VARCHAR(50) NOT NULL,
+    PhoneNumber VARCHAR(11),
+    Email VARCHAR(100) NOT NULL UNIQUE,
+	UserPassword VARCHAR(50) NOT NULL,
+    Sex ENUM('male','female'),
+    Bdate date
+);
+
+CREATE TABLE Offices (
+    OfficeID INT PRIMARY KEY AUTO_INCREMENT,
+    PhoneNumber VARCHAR(11),
+    Country VARCHAR(100) NOT NULL,
+    City VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Cars (
+    CarID INT PRIMARY KEY AUTO_INCREMENT,
+    PlateID INT UNIQUE,
+    OfficeID INT UNIQUE NOT NULL,
+	FOREIGN KEY (OfficeID) REFERENCES Offices(OfficeID),
+    ModelName VARCHAR(50) NOT NULL,
+    ModelYear INT NOT NULL,
+    RentValue DOUBLE(10,2) NOT NULL,
+    CarStatus ENUM('Active', 'Out Of Service', 'Rented')
+);
+
+CREATE TABLE Payments (
+    PaymentID INT PRIMARY KEY AUTO_INCREMENT,
+    PaymentDate DATE NOT NULL,
+    Amount DECIMAL(10, 2) NOT NULL
+);
+
+CREATE TABLE Reservations (
+    ReservationID INT PRIMARY KEY AUTO_INCREMENT,
+    PlateID INT NOT NULL ,
+    FOREIGN KEY (PlateID) REFERENCES Cars(PlateID),
+    CustomerID INT NOT NULL,
+    FOREIGN KEY (CustomerID) REFERENCES  Customers(CustomerID),
+    PaymentID INT NOT NULL,
+    FOREIGN KEY (PaymentID) REFERENCES  Payments(PaymentID),
+    ReservationDate DATE NOT NULL,
+    PickupDate DATE NOT NULL,
+    ReturnDate DATE NOT NULL
+);
