@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import SlidingMenu from "./SlidingMenu";
+import "../styles/header.css";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,21 +12,21 @@ export default function Header() {
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
-    <header className="bg-white">
+    <header className=" hh bg-white">
       <nav
         aria-label="Global"
-        className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+        className=" nav-header mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
       >
         <div className="flex lg:flex-1">
           <button
             onClick={openMenu}
             className="-m-1.5 p-1.5 text-gray-900 font-semibold"
           >
-            <span>Log in</span>
+            <span class="log-btn">Log in</span>
           </button>
         </div>
         <div>
-          <h1>Car Rental System</h1>
+          <h1>SwiftWheel</h1>
         </div>
         <div className="flex lg:hidden">
           <button
@@ -37,7 +38,7 @@ export default function Header() {
         </div>
 
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm/6 font-semibold text-gray-900">
+          <a href="#" className=" log-btn text-sm/6 font-semibold text-gray-900">
             Contact US <span aria-hidden="true">&rarr;</span>
           </a>
         </div>

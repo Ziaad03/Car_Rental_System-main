@@ -3,6 +3,7 @@ import AdminHeader from "./AdminPageComponents/AdminHeader";
 import CarManagement from "./AdminPageComponents/CarManagement";
 import ReservationManagement from "./AdminPageComponents/ReservationManagement";
 import Reporting from "./AdminPageComponents/Reporting";
+import OfficeManagement from "./AdminPageComponents/OfficeManagement";
 
 export default function AdminPage() {
   const [activeSection, setActiveSection] = useState("CarManagement");
@@ -15,6 +16,8 @@ export default function AdminPage() {
         return <ReservationManagement />;
       case "Reporting":
         return <Reporting />;
+      case "OfficeManagement":
+        return <OfficeManagement />;
       default:
         return <CarManagement />;
     }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import "../../../styles/carform.css";
 
 export default function AddCarForm() {
+  const [brandName, setBrandName] = useState("");
   const [modelName, setModelName] = useState("");
   const [officeID, setOfficeID] = useState("");
   const [modelYear, setModelYear] = useState("");
@@ -15,7 +16,7 @@ export default function AddCarForm() {
     e.preventDefault();
 
     // Validate form fields
-    if (!modelName || !officeID || !modelYear || !plateID || !rentValue) {
+    if (!modelName || !officeID || !modelYear || !plateID || !rentValue || !brandName) {
       setErrorMessage("Please fill in all the fields.");
       return;
     }
@@ -28,6 +29,7 @@ export default function AddCarForm() {
           "Content-Type": "application/x-www-form-urlencoded", // Use form encoding
         },
         body: new URLSearchParams({
+          brand_name: brandName,
           model_name: modelName,
           office_id: officeID,
           model_year: modelYear,
@@ -37,12 +39,14 @@ export default function AddCarForm() {
         }),
       });
 
+
       const data = await response.text(); // Read the response
 
       if (data.includes("New car added successfully!")) {
         setSuccessMessage("Car added successfully!");
         setErrorMessage("")
         // Clear the form after successful submission
+        setBrandName("");
         setModelName("");
         setOfficeID("");
         setModelYear("");
@@ -65,6 +69,20 @@ export default function AddCarForm() {
       {errorMessage && <p className="text-sm text-red-500 mb-4">{errorMessage}</p>}
       {successMessage && <p className="text-sm text-green-500 mb-4">{successMessage}</p>}
       <form className="car-form space-y-4" onSubmit={handleSubmit}>
+      <input
+          type="text"
+          placeholder="Office Id"
+          className=" office-btn w-full p-2 border rounded"
+          value={officeID}
+          onChange={(e) => setOfficeID(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Brand"
+          className="w-full p-2 border rounded"
+          value={brandName}
+          onChange={(e) => setBrandName(e.target.value)}
+        />
         <input
           type="text"
           placeholder="Model"
@@ -72,13 +90,7 @@ export default function AddCarForm() {
           value={modelName}
           onChange={(e) => setModelName(e.target.value)}
         />
-        <input
-          type="text"
-          placeholder="Office Id"
-          className="w-full p-2 border rounded"
-          value={officeID}
-          onChange={(e) => setOfficeID(e.target.value)}
-        />
+        
         <input
           type="text"
           placeholder="Year"

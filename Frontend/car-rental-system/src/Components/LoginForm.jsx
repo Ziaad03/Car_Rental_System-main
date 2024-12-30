@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "./UserContext"; // Import the custom hook
 
 export default function LoginForm({ role }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const { setUser } = useUser(); // Get the setUser function from context
 
   // change this according to the backend
   const handleSubmit = async (event) => {
@@ -43,7 +45,7 @@ export default function LoginForm({ role }) {
           console.log(data)
           if (data.success) {
             console.log("in data,sucess")
-
+            setUser({ email });
             navigate("/admin");
 
             // Perform additional actions on successful login
@@ -81,6 +83,7 @@ export default function LoginForm({ role }) {
         if (response.ok) {
           const data = await response.json();
           if (data.success) {
+            setUser({ email });
             navigate("/customer");
             // Perform additional actions on successful login
           } else {

@@ -9,6 +9,8 @@ include 'db.php'; // Include the database connection
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Get the input data from the frontend
+    $brandName = $_POST['brand_name'];
     $plateID = $_POST['plate_id'];
     $officeID = $_POST['office_id'];
     $modelName = $_POST['model_name'];
@@ -17,8 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $carStatus = $_POST['car_status'];
 
     // SQL to insert a new car into the database
-    $sql = "INSERT INTO Cars (PlateID, OfficeID, ModelName, ModelYear, RentValue, CarStatus) 
-            VALUES ('$plateID', '$officeID', '$modelName', '$modelYear', '$rentValue', '$carStatus')";
+    $sql = "INSERT INTO Cars (PlateID, OfficeID, BrandName ,ModelName, ModelYear, RentValue, CarStatus) 
+            VALUES ('$plateID', '$officeID','$brandName', '$modelName', '$modelYear', '$rentValue', '$carStatus')";
 
     if ($conn->query($sql) === TRUE) {
         echo "New car added successfully!";

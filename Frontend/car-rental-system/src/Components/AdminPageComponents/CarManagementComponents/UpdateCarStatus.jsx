@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../../../styles/carform.css";
 
 export default function UpdateCarStatus() {
   const [carID, setCarID] = useState("");
@@ -72,7 +73,7 @@ export default function UpdateCarStatus() {
         <input
           type="number"
           placeholder="Car ID"
-          className="w-full p-2 border rounded"
+          className=" carid-btns w-full p-2 border rounded"
           value={carID}
           onChange={(e) => setCarID(e.target.value)}
           required

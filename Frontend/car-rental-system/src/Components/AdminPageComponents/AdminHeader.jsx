@@ -1,5 +1,5 @@
 export default function AdminHeader({ activeSection, setActiveSection }) {
-  const sections = ["CarManagement", "ReservationManagement", "Reporting"];
+  const sections = ["CarManagement", "OfficeManagement","ReservationManagement", "Reporting"];
 
   return (
     <div className="flex space-x-4">

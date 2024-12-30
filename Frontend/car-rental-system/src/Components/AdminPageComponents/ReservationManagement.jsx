@@ -6,7 +6,7 @@ export default function ReservationManagement() {
     <div>
       <h2 className="text-xl font-semibold mb-4">Reservation Management</h2>
       <div className="space-y-8">
-        <ManageReservations />
+        
         <AdvancedSearch />
       </div>
     </div>

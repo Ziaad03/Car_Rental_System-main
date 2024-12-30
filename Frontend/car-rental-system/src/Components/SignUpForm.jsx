@@ -52,7 +52,7 @@ export default function SignUpForm() {
       if (response.ok) {
         const data = await response.json();
         if (data.success) {
-          setSuccessMessage("Account created successfully!");
+          setSuccessMessage("Account created successfully! Please log in.");
           setErrorMessage("")
           // Perform additional actions on successful sign up
           // Reset the form

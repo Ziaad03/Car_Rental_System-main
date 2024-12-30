@@ -1,0 +1,30 @@
+.nav-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    width: 100%;
+    background-color: transparent ; /* Makes the background transparent */
+    
+    color: white;
+    
+    
+    
+  
+}
+
+.hh{
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    background-color: transparent ; /* Makes the background transparent */
+    background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
+    border-bottom: 1px solid rgb(155, 166, 200);
+}
+
+.log-btn{
+    color: white;
+}
+

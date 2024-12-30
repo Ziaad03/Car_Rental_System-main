@@ -14,9 +14,7 @@ CREATE TABLE Admins (
     LastName VARCHAR(50) NOT NULL,
     PhoneNumber VARCHAR(11),
     Email VARCHAR(100) NOT NULL UNIQUE,
-	UserPassword VARCHAR(50) NOT NULL,
-    Sex ENUM('male','female'),
-    Bdate date 
+	UserPassword VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE Customers (
@@ -25,13 +23,12 @@ CREATE TABLE Customers (
     LastName VARCHAR(50) NOT NULL,
     PhoneNumber VARCHAR(11),
     Email VARCHAR(100) NOT NULL UNIQUE,
-	UserPassword VARCHAR(50) NOT NULL,
-    Sex ENUM('male','female'),
-    Bdate date
+	UserPassword VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE Offices (
     OfficeID INT PRIMARY KEY AUTO_INCREMENT,
+    OfficeName VARCHAR(50) NOT NULL, 
     PhoneNumber VARCHAR(11),
     Country VARCHAR(100) NOT NULL,
     City VARCHAR(100) NOT NULL
@@ -40,19 +37,16 @@ CREATE TABLE Offices (
 CREATE TABLE Cars (
     CarID INT PRIMARY KEY AUTO_INCREMENT,
     PlateID INT UNIQUE,
-    OfficeID INT UNIQUE NOT NULL,
+    OfficeID INT  NOT NULL,
 	FOREIGN KEY (OfficeID) REFERENCES Offices(OfficeID),
+    BrandName VARCHAR(50) NOT NULL,
     ModelName VARCHAR(50) NOT NULL,
     ModelYear INT NOT NULL,
     RentValue DOUBLE(10,2) NOT NULL,
     CarStatus ENUM('Active', 'Out Of Service', 'Rented')
 );
 
-CREATE TABLE Payments (
-    PaymentID INT PRIMARY KEY AUTO_INCREMENT,
-    PaymentDate DATE NOT NULL,
-    Amount DECIMAL(10, 2) NOT NULL
-);
+
 
 CREATE TABLE Reservations (
     ReservationID INT PRIMARY KEY AUTO_INCREMENT,
@@ -60,9 +54,16 @@ CREATE TABLE Reservations (
     FOREIGN KEY (PlateID) REFERENCES Cars(PlateID),
     CustomerID INT NOT NULL,
     FOREIGN KEY (CustomerID) REFERENCES  Customers(CustomerID),
-    PaymentID INT NOT NULL,
-    FOREIGN KEY (PaymentID) REFERENCES  Payments(PaymentID),
     ReservationDate DATE NOT NULL,
     PickupDate DATE NOT NULL,
     ReturnDate DATE NOT NULL
 );
+
+CREATE TABLE Payments (
+    PaymentID INT PRIMARY KEY AUTO_INCREMENT,
+    ReservationID INT NOT NULL,
+    FOREIGN Key (ReservationID) REFERENCES Reservations(ReservationID),
+    PaymentDate DATE NOT NULL,
+    Amount DECIMAL(10, 2) NOT NULL
+);
+

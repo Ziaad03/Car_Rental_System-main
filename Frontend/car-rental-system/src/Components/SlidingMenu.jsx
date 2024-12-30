@@ -11,7 +11,7 @@ import customerimg from "../img/customer.png";
 
 export default function SlidingMenu({ isOpen, onClose }) {
   const [activeForm, setActiveForm] = useState("none"); // 'none', 'adminLogin', 'customerOptions', 'customerLogin', or 'customerSignup'
-
+  
   const handleBack = () => {
     switch (activeForm) {
       case "adminLogin":
